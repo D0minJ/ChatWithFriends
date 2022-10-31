@@ -1,9 +1,12 @@
-
+import Header from "./Components/Header/Header";
+import Sidebar from "./Components/Sidebar/sidebar";
 
 function Home(){
     return(
         <div className="home">
-            <h1>HOME PAGE</h1>
+            <Header/>
+            <Sidebar/>
+            
         </div>
     );
 

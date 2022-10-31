@@ -10,7 +10,7 @@ function Header(){
                 <S.LogInButton>
                     Log In
                 </S.LogInButton>
-                <S.SignUpButton>
+                <S.SignUpButton >
                     Sign up
                 </S.SignUpButton>
             </S.Buttons> 
