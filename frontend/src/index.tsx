@@ -2,29 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import NotFound from './pages/not-found/NotFound';
-import Register from './pages/register/Register';
+import Auth from './pages/Auth/Auth';
+import Error from './pages/Error/Error';
+import Chat from './pages/Chat/Chat';
+import { ChakraProvider } from '@chakra-ui/react'
 
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
+  // {
+  //   path: "/",
+  //   element: <Chat/>,
+  // },
   {
     path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/error",
-    element: <NotFound />,
+    element: <Auth />,
   }
+  // {
+  //   path: "/error",
+  //   element: <Error />,
+  // }
 ])
 
 
@@ -34,8 +30,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ChakraProvider>
+      <RouterProvider router={router}/>
+    </ChakraProvider>
   </React.StrictMode>
 );
 
-// APP.TSX DOES NOT HAVE TO EXISTS
+
