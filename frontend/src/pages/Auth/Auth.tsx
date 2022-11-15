@@ -21,7 +21,7 @@ export default function Auth(){
             <Center>
                 <Center bg='#CDC1FF' top='15%' position='absolute' borderRadius='6px' w='30rem' h='37rem'>
                     <Tabs variant='soft-rounded' colorScheme='purple' isFitted >
-                        <TabList mb='3rem'>
+                        <TabList mb='5rem'>
                             <Tab>Login</Tab>
                             <Spacer/>
                             <Tab>Sign Up</Tab>

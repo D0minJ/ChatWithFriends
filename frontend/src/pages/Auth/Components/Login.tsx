@@ -29,11 +29,11 @@ export default function Login(){
         <VStack>
             <FormControl id='email'>
                 <FormLabel>Email</FormLabel>
-                <Input type='email' placeholder='Email' focusBorderColor='red' size='lg' w='20rem'/>      
+                <Input type='email' placeholder='Email' size='lg' w='20rem' bg='white' borderRadius='20px'/>      
             </FormControl>
             <FormControl>
                 <FormLabel>Password</FormLabel>
-                <Input type='password' placeholder='Password' size='lg' />
+                <Input type='password' placeholder='Password' size='lg' w='20rem' bg='white' borderRadius='20px' mb='2rem' />
             </FormControl>
             <Button>
                 Login

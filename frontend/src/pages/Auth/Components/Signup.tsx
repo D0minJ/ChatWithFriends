@@ -24,8 +24,6 @@ import
 
 
 export default function Signup(){
-
-
     return(
         <VStack>
             <FormControl id='username'>
@@ -34,18 +32,15 @@ export default function Signup(){
             </FormControl>
             <FormControl id='email' >
                 <FormLabel >Email</FormLabel>
-                <Input type='email' placeholder='Email' size='lg' />  
+                <Input type='email' placeholder='Email' size='lg' w='20rem' bg='white' borderRadius='20px' />  
             </FormControl>
             <FormControl>
                 <FormLabel>Password</FormLabel>
-                <Input type='password' placeholder='Password' size='lg'/>
+                <Input type='password' placeholder='Password' size='lg' w='20rem' bg='white' borderRadius='20px' mb='2rem' />
             </FormControl>
             <Button>
                 Sign Up
             </Button>
         </VStack>
     )
-
-    
-
 }

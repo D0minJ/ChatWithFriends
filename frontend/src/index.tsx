@@ -6,15 +6,16 @@ import Auth from './pages/Auth/Auth';
 import Error from './pages/Error/Error';
 import Chat from './pages/Chat/Chat';
 import { ChakraProvider } from '@chakra-ui/react'
-
+import { theme } from "./themes/theme"
+import "@fontsource/pacifico"
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <Chat/>,
-  // },
   {
-    path: "/register",
+    path: "/",
+    element: <Chat/>,
+  },
+  {
+    path: "/auth",
     element: <Auth />,
   }
   // {
@@ -30,7 +31,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RouterProvider router={router}/>
     </ChakraProvider>
   </React.StrictMode>
