@@ -1,14 +1,14 @@
 import express from "express"
-import {GetRegister} from "../controller/Auth-Controller"
+import {Register} from "../controller/Auth-Controller"
 
 
 const router = express.Router()
 
 
 
-router.get("/register", GetRegister)
+router.post("/register", Register)
 
-router.get("/login")
+
 
 
 

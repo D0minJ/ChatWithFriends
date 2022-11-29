@@ -16,14 +16,14 @@ dotenv.config()
 app.use(express.json());
 app.use(cors());
 
+app.use("/api/v1/auth", AuthRoute)
 
-
+// REIMPLEMENT "START" FUNCTION (DELETE CALLBACK)
 
 const start = async () =>{
     try{
         await mongoose.connect(process.env.MongoURL!)
-        .then(() => console.log("Connection with database has been established ")) 
-        .catch(err => console.log(err));
+        console.log("Connection with database has been established ") 
         server.listen(process.env.PORT, () =>{
             console.log("SERVER STARTED AT PORT: " + process.env.PORT)   
         });

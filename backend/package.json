@@ -19,5 +19,12 @@
     "@types/nodemon": "^1.19.2",
     "@types/socket.io": "^3.0.2",
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/http-status-codes": "^1.2.0",
+    "@types/validator": "^13.7.10",
+    "bcrypt": "^5.1.0",
+    "validator": "^13.7.0"
   }
 }
