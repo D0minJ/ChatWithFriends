@@ -1,21 +1,18 @@
 import { Box } from "@chakra-ui/react"
 import React from "react"
-import ChatPanel from "./Components/ChatPanel"
-import Header from "./Components/Header"
-import Sidebar from "./Components/Sidebar"
+import ChatPanel from "./Components/ChatPanel/ChatPanel"
+import Menu from "./Components/Menu/Menu"
+import OptionPanel from "./Components/OptionPanel/OptionPanel"
 
 
 
 
 export default function Chat(){
     return(
-        <Box>
-            <Header/>
-            <Sidebar/>
-            
-            
-            {/* <ChatPanel/> */}
+        <Box display="flex" overflow="hidden">
+            <OptionPanel/>
+            <Menu/>
+            <ChatPanel/>
         </Box>
     )
-
 }

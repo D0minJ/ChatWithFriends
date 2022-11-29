@@ -1,24 +1,5 @@
 import { useState } from 'react'
-import 
-{ 
-    Box,
-    Center,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    VStack,
-    Input,
-    InputGroup,
-    InputRightElement,
-    Button
-
-} from '@chakra-ui/react'
+import { FormControl, FormLabel, VStack, Input, Button } from '@chakra-ui/react'
 
 
 
