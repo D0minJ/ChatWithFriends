@@ -18,7 +18,7 @@ app.use(cors());
 
 app.use("/api/v1/auth", AuthRoute)
 
-// REIMPLEMENT "START" FUNCTION (DELETE CALLBACK)
+
 
 const start = async () =>{
     try{
