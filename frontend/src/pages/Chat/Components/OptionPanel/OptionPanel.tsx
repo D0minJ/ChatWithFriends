@@ -4,19 +4,19 @@ import {AiFillSetting} from "react-icons/ai";
 
 export default function OptionPanel(){
     return(
-        <Box h="100vh" minW="75px" maxW="75px" bg="#957FEF" display="flex" position="relative" justifyContent="center" >
-            <Center fontFamily="logo" color="white" fontSize="xl" position="absolute">
+        <Box h="100vh" minW="75px" maxW="75px" bg="#FFFFFF" display="flex" position="relative" justifyContent="center" >
+            <Center fontFamily="logo" color="#E5383B" fontSize="xl" position="absolute">
                 CwF
             </Center>
             <VStack justify="center" spacing="15px">
                 <Tooltip label="Chats" placement="right">
-                    <IconButton aria-label='Show chats' icon={<BsChatDotsFill size="sm" color="white" />} size="sm" bg="#957FEF" variant="unstyled" />
+                    <IconButton aria-label='Show chats' icon={<BsChatDotsFill size="sm" color="#BA181B" />} size="sm" bg="#FFFFFF" variant="unstyled" />
                 </Tooltip>
                 <Tooltip label="People" placement="right">
-                    <IconButton aria-label='Show users' icon={<BsFillPersonFill size="sm" color="white" />} size="sm" bg="#957FEF" variant="unstyled" />
+                    <IconButton aria-label='Show users' icon={<BsFillPersonFill size="sm" color="#BA181B" />} size="sm" bg="#FFFFFF" variant="unstyled" />
                 </Tooltip>
                 <Tooltip label="Settings" placement="right">
-                    <IconButton aria-label='Show settings' icon={<AiFillSetting size="sm" color="white" />} size="sm" bg="#957FEF" variant="unstyled" />
+                    <IconButton aria-label='Show settings' icon={<AiFillSetting size="sm" color="#BA181B" />} size="sm" bg="#FFFFFF" variant="unstyled" />
                 </Tooltip>
                 
                 

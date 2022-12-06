@@ -6,7 +6,7 @@ import MessagesPanel from "./MessagesPanel";
 
 export default function ChatPanel(){
     return(
-        <Box h="100vh"  minW="77%" bg="#DEC0F1" >
+        <Box h="100vh"  minW="77%" bg="#FFFFFF" >
             <Header/>
             <MessagesPanel/>
             <ChatInput/>

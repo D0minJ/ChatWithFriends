@@ -1,12 +1,17 @@
 import { extendTheme } from "@chakra-ui/react"
-import "@fontsource/roboto"
+import "@fontsource/open-sans"
 
 
 export const theme = extendTheme({
     fonts:{
         logo: "Pacifico, cursive",
-        body: "Roboto, sans-serif"
+        body: "Open Sans, sans-serif"
+    },
+    colors:{
+        focusRed: "#161A1D",
+        errorMsg: "#E5383B"
     }
+    
 
 
     
