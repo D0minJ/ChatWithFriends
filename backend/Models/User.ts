@@ -32,11 +32,16 @@ const UserSchema = new Schema({
         trim: true,
         required: true
     },
-    dateCreated: {
+    refreshToken: {
+        token: String,
+        dateCreatedToken: Date,
+        tokenExpire: Date
+    },
+    dateCreatedAccount: {
         type: String,
         default: new Date(Date.now())
     }
 
 });
 
-export default model("User", UserSchema);
+export default model("User", UserSchema, "users");

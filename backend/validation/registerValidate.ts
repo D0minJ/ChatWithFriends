@@ -1,11 +1,11 @@
 import validator from "validator";
 
 
-function ValidateRegister(data: any){
+function validateRegister(data: any){
     const error = {error: ""}
 
     // PASSWORD VALIDATION:
-    if(!validator.isStrongPassword(data.password) || data.password.length <= 128 || validator.contains(data.password, " ")){
+    if(!validator.isStrongPassword(data.password) || data.password.length >= 128 || validator.contains(data.password, " ")){
         error.error = "Invalid password";
     }
 
@@ -38,4 +38,4 @@ function ValidateRegister(data: any){
     }
 }
 
-export default ValidateRegister;
+export default validateRegister;

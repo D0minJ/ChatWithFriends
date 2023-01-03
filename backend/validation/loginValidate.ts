@@ -1,10 +1,10 @@
 import validator from "validator";
 
-function ValidateLogin(data: any){
+function validateLogin(data: any){
     const error = {error: ""}
 
     // PASSWORD VALIDATION:
-    if(!validator.isStrongPassword(data.password) || data.password.length <= 128 || validator.contains(data.password, " ")){
+    if(!validator.isStrongPassword(data.password) || data.password.length >= 128 || validator.contains(data.password, " ")){
         error.error = "Invalid password";
     }
 
@@ -20,4 +20,4 @@ function ValidateLogin(data: any){
 }
 
 
-export default ValidateLogin;
+export default validateLogin;
