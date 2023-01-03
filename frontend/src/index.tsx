@@ -1,28 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
-import Auth from './pages/Auth/Auth';
-import Error from './pages/Error/Error';
-import Chat from './pages/Chat/Chat';
+import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from "./themes/theme"
 import "@fontsource/pacifico"
+import {AuthProvider}  from './context/AuthProvider';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Chat/>,
-  },
-  {
-    path: "/auth",
-    element: <Auth />,
-  }
-  // {
-  //   path: "/error",
-  //   element: <Error />,
-  // }
-])
+
+
 
 
 
@@ -32,7 +19,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <RouterProvider router={router}/>
+      <AuthProvider>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

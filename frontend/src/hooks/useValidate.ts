@@ -1,27 +1,36 @@
+
 import validator from "validator"
 
 
+interface Error {
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+    password?: string;
+}
+
+
+
 export default function Validate(data: any){
-    const errors = {
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-        
-    }
+    const errors = <Error>{};
+
 
     // VALDIATE LOGIN FORM:
 
-    if(Object.keys(data).length === 2){      
+    if(Object.keys(data).length === 2){    
+        
 
         // EMAIL VALIDATION:
-        if(data.password.length <= 128 || validator.contains(data.password, " ")){
-            errors.password = "Valid password required";
-        }
-
         if(!validator.isEmail(data.email) || validator.contains(data.email, " ")){
             errors.email = "Valid email required";
         }
+        
+        if(data.password.length >= 128){
+            errors.password = "Valid password required";
+        }
+
+
+        //const isValid = Object.values(errors).length == 0; 
         
         return errors
 
@@ -32,15 +41,10 @@ export default function Validate(data: any){
 
     if(Object.keys(data).length === 4){    
 
-            // PASSWORD VALIDATION:
-        if(!validator.isStrongPassword(data.password) || data.password.length >= 128 || validator.contains(data.password, " ")){
-            errors.password = "Your password should be at least 8 characters long and contain one uppercase letter, one symbol, and a number.";
-        }
+        // FIRSTNAME VALIDATION:
 
-        // EMAIL VALIDATION:
-
-        if(!validator.isEmail(data.email) || validator.contains(data.email, " ")){
-            errors.email = "Valid email required";
+        if(!validator.isLength(data.firstname, {min: 1, max: 24}) || validator.contains(data.firstname, " ") || !validator.isAlpha(data.firstname)){
+            errors.firstname = "Invalid firstname";
         }
 
         // LASTNAME VALIDATION
@@ -49,14 +53,25 @@ export default function Validate(data: any){
             errors.lastname = "Invalid lastname";
         }
 
-        // FIRSTNAME VALIDATION:
+        // EMAIL VALIDATION:
 
-        if(!validator.isLength(data.firstname, {min: 1, max: 24}) || validator.contains(data.firstname, " ") || !validator.isAlpha(data.firstname)){
-            errors.firstname = "Invalid firstname";
+        if(!validator.isEmail(data.email) || validator.contains(data.email, " ")){
+            errors.email = "Invalid email";
+        }
+        
+
+        // PASSWORD VALIDATION:
+        if(!validator.isStrongPassword(data.password) || data.password.length >= 128 || validator.contains(data.password, " ")){
+            errors.password = "Your password should be at least 8 characters long and contain one uppercase letter, one symbol, and a number.";
         }
 
 
+        //const isValid = Object.values(errors).length == 0; 
+        
         return errors
+        
     }
+
+    
    
 }

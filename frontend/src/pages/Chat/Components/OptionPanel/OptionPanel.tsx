@@ -4,7 +4,7 @@ import {AiFillSetting} from "react-icons/ai";
 
 export default function OptionPanel(){
     return(
-        <Box h="100vh" minW="75px" maxW="75px" bg="#FFFFFF" display="flex" position="relative" justifyContent="center" >
+        <Box h="100vh" w="4%"   bg="#FFFFFF" display="flex" position="relative" justifyContent="center" >
             <Center fontFamily="logo" color="#E5383B" fontSize="xl" position="absolute">
                 CwF
             </Center>
