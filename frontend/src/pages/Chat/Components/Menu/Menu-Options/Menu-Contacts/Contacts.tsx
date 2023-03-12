@@ -1,7 +1,7 @@
 import { Box, Input, VStack, Text } from "@chakra-ui/react"
 import Contact from "./Contact"
-import { useEffect, useState, useRef } from "react"
-import axios, { AxiosResponse } from "axios";
+import { useState } from "react"
+import axios from "axios";
 
 export default function Contacts(){
     const [users, setUsers] = useState<any | []>([])

@@ -1,10 +1,12 @@
-import { useState } from 'react'
-import { FormControl, FormLabel, VStack, Input, Button, HStack, InputGroup, InputRightElement, InputRightAddon ,Tooltip } from '@chakra-ui/react'
+import React, { useState } from 'react'
+
+import { FormControl, FormLabel, VStack, Input, Button, HStack, InputGroup, InputRightElement, Tooltip } from '@chakra-ui/react'
+
 import {BsCheck} from 'react-icons/bs'
 import {IoWarning} from 'react-icons/io5'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import useValidate from '../../../hooks/useValidate'
 
+import useValidate from '../../../hooks/useValidate'
 
 
 export default function Signup(props: any){
@@ -16,8 +18,6 @@ export default function Signup(props: any){
     const errors = useValidate({firstname: fname.trim(), lastname: lname.trim(), email: email.trim(), password: password.trim()})!
    
     
-
-
     return(
         <form onSubmit={(e) => props.registerSubmit(e, {firstname: fname, lastname: lname, email: email, password: password}, errors)} autoComplete="off">
             <VStack>
@@ -25,29 +25,52 @@ export default function Signup(props: any){
                     <FormControl id='firstname'>
                         <FormLabel>Firstname</FormLabel>
                         <InputGroup>
-                            <Input type='text' placeholder='Firstname' size='lg' bg='white' borderRadius='18px' focusBorderColor='focusRed' autoComplete='off' onChange={(e) => setFname(e.target.value)}/>
-                            {(errors.firstname !== undefined && fname.length > 0 ) &&
-                                <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.firstname} >
-                                    <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px"  />
-                                </Tooltip>
+                            <Input type='text' 
+                                placeholder='Firstname' 
+                                size='lg' 
+                                bg='white' 
+                                borderRadius='18px' 
+                                focusBorderColor='focusRed' 
+                                autoComplete='off' 
+                                onChange={(e: React.ChangeEvent<HTMLInputElement> ) => setFname(e.target.value)}/>
+
+                            {
+                                (errors.firstname !== undefined && fname.length > 0 ) &&
+                                    <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.firstname} >
+                                        <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px"  />
+                                    </Tooltip>
                             }
-                            {errors.firstname === undefined &&
-                                <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px"  />
+
+                            {
+                                errors.firstname === undefined &&
+                                    <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px"  />
                             }
+
                         </InputGroup>
                     </FormControl>
 
                     <FormControl id='lastname'>
                         <FormLabel>Lastname</FormLabel>
                         <InputGroup>
-                            <Input type='text' placeholder='Lastname' size='lg' bg='white' borderRadius='18px' focusBorderColor='focusRed'  autoComplete='off' onChange={(e) => setLname(e.target.value)}/>
-                            {(errors.lastname !== undefined && lname.length > 0 ) &&
-                                <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.lastname} >
-                                    <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px"  />
-                                </Tooltip>
+                            <Input type='text' 
+                                placeholder='Lastname' 
+                                size='lg' 
+                                bg='white' 
+                                borderRadius='18px' 
+                                focusBorderColor='focusRed'  
+                                autoComplete='off' 
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLname(e.target.value)}/>
+
+                            {
+                                (errors.lastname !== undefined && lname.length > 0 ) &&
+                                    <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.lastname} >
+                                        <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px"  />
+                                    </Tooltip>
                             }
-                            {errors.lastname === undefined &&
-                                <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px"  />
+
+                            {
+                                errors.lastname === undefined &&
+                                    <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px"  />
                             }
                             
                         </InputGroup>
@@ -57,14 +80,25 @@ export default function Signup(props: any){
                 <FormControl id='email' >
                     <FormLabel>Email</FormLabel>
                     <InputGroup>
-                        <Input type='text' placeholder='Email' size='lg' bg='white' borderRadius='18px' focusBorderColor='focusRed'  autoComplete='off' onChange={(e) => setEmail(e.target.value)}/>
-                        {(errors.email !== undefined && email.length > 0 ) &&
-                            <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.email} >
-                                <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px"  />
-                            </Tooltip>
+                        <Input type='text' 
+                            placeholder='Email' 
+                            size='lg' 
+                            bg='white' 
+                            borderRadius='18px' 
+                            focusBorderColor='focusRed'  
+                            autoComplete='off' 
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}/>
+
+                        {
+                            (errors.email !== undefined && email.length > 0 ) &&
+                                <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.email} >
+                                    <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px"  />
+                                </Tooltip>
                         }
-                        {errors.email === undefined &&
-                            <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px"  />
+
+                        {
+                            errors.email === undefined &&
+                                <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px"  />
                         }
                         
                     </InputGroup>
@@ -73,14 +107,25 @@ export default function Signup(props: any){
                 <FormControl>
                     <FormLabel>Password</FormLabel>
                     <InputGroup>
-                        <Input type={show ? 'text' : 'password'} placeholder='Password' size='lg' bg='white' borderRadius='18px' mb='2rem' focusBorderColor='focusRed'  onChange={(e) => setPassword(e.target.value)}/>
-                        {(errors.password !== undefined && password.length > 0 ) &&
-                            <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.password} >
-                                <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px" right="30px" />
-                            </Tooltip>
+                        <Input type={show ? 'text' : 'password'} 
+                            placeholder='Password' 
+                            size='lg' 
+                            bg='white' 
+                            borderRadius='18px' 
+                            mb='2rem' 
+                            focusBorderColor='focusRed'  
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}/>
+
+                        {
+                            (errors.password !== undefined && password.length > 0 ) &&
+                                <Tooltip hasArrow placement='right' bg="errorMsg" label={errors.password} >
+                                    <InputRightElement children={<IoWarning size='30px' color='red'  />} borderRadius='18px' boxSize="45px" right="30px" />
+                                </Tooltip>
                         }
-                        {errors.password === undefined &&
-                            <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px" right="30px"  />
+
+                        {
+                            errors.password === undefined &&
+                                <InputRightElement children={<BsCheck size='30px' color='green'  />} borderRadius='18px' boxSize="45px" right="30px"  />
                         }
 
                         <InputRightElement boxSize="45px" borderRadius="18px"  >
@@ -88,7 +133,6 @@ export default function Signup(props: any){
                         </InputRightElement>
                     </InputGroup>  
                 </FormControl>
-
                 <Button size="lg" borderRadius='18px' type='submit' colorScheme="red" w='100%' >
                     Sign Up
                 </Button>

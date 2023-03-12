@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { Box, Center, IconButton, Avatar, VStack, Tooltip, Button } from "@chakra-ui/react";
+
+import { Box, Center, Avatar, VStack, Tooltip, Button } from "@chakra-ui/react";
 import {BsChatDotsFill, BsFillPersonFill} from "react-icons/bs";
+
 import PageContext from "../../../../context/PageProvider";
 
 export default function OptionPanel(){
     const { setPage }:any = useContext(PageContext)
+
     return(
         <Box h="100vh" w="4%"   bg="#FFFFFF" display="flex" position="relative" justifyContent="center" borderRight="1px solid #F5F3F4" >
             <Center fontFamily="logo" color="#E5383B" fontSize="xl" position="absolute">
@@ -25,8 +28,6 @@ export default function OptionPanel(){
             <Center position="absolute" bottom="1%">
                 <Avatar cursor="pointer" onClick={() => setPage("profile")}/>
             </Center>
-
         </Box>
     )
-
 }

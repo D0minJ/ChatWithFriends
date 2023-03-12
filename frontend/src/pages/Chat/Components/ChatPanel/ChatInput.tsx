@@ -1,22 +1,20 @@
 import { useRef } from "react"
+
 import { HStack, Input, IconButton } from "@chakra-ui/react"
 import {HiOutlineEmojiHappy} from "react-icons/hi"
 import {MdOutlineAttachFile} from "react-icons/md"
 import {AiOutlineSend} from "react-icons/ai"
 
 
-export default function ChatInput({socket, userID, friendID, fromUsername, toUsername, }: any){
+export default function ChatInput({socket, userID, friendID, fromUsername, toUsername}: any){
     const message: any = useRef("")
     
-    
-
     const onSendMessage = (e: any) => {
         e.preventDefault();
         socket.emit("send message", userID, friendID, fromUsername, toUsername, message.current.value);
         message.current.value = "";
 
     }
-
 
     return(
         <form onSubmit={onSendMessage}>

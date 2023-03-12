@@ -1,6 +1,7 @@
-import { Avatar, Box, Container, Flex } from "@chakra-ui/react"
+import { Avatar, Box, Flex } from "@chakra-ui/react"
 
 export default function FriendMessage(props:any){
+
     return(
         <Box w="96%" mx="auto" pos="relative">
             <Flex margin="10px" w="35%" alignItems="flex-end">
