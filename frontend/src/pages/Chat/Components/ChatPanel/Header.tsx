@@ -1,13 +1,14 @@
-import { Avatar, Box, Flex, HStack, Text } from "@chakra-ui/react"
+import { Avatar, HStack, Text } from "@chakra-ui/react"
 
 
-export default function Header(){
+export default function Header({username}: any){
+    
+
+
     return(
-        <HStack bg="#F5F3F4" w="100%" h="6rem" >
+        <HStack bg="#FFFFFF" w="100%" h="6rem" >
             <Avatar ml="1rem"/>
-            <Text>Mamm0n</Text>
-
-            
+            <Text> {username} </Text>
         </HStack>
     )
 

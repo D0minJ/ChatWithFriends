@@ -1,12 +1,14 @@
 import express from "express"
-import {handleRefreshToken} from "../controller/tokenController"
+import {renewAccessToken, verifyRefreshToken} from "../controller/tokenController"
 
 
 const router = express.Router()
 
-// RENEW ACCESS TOKEN
-router.get("/renewtoken", handleRefreshToken)
 
+router.get("/renewtoken", renewAccessToken)
+
+
+router.get("/verifytoken", verifyRefreshToken)
 
 
 export default router;

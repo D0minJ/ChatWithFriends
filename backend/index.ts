@@ -1,27 +1,36 @@
-import express, {Express, Request, Response} from "express";
+import express, {Express, Request, Response, NextFunction} from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import http from "http"
+import {createServer} from "http"
 import cors from "cors"
 import credentials from "./middleware/credentials";
 import corsOptions from "./config/corsOptions";
 import AuthRoute from "./routes/auth";
 import TokenRoute from "./routes/token"
+import UserRoute from "./routes/user"
+import UsersRoute from "./routes/users"
+import MessageRoute from "./routes/message"
 import { StatusCodes } from "http-status-codes";
 import { verifyJWT } from "./middleware/verifyJWT";
 import cookieParser from "cookie-parser";
+import SocketServer from "./socket/socketServer";
+import { Server, Socket } from "socket.io"
 
+dotenv.config()
 
+interface ISocket extends Socket{
+    userID?: string
+}
 
 const app = express();
-const server = http.createServer(app);
-dotenv.config()
+const httpServer = createServer(app);
+
 
 const start = async () =>{
     try{
         await mongoose.connect(process.env.MongoURL!)
         console.log("Connection with database has been established ") 
-        server.listen(process.env.PORT, () =>{
+        httpServer.listen(process.env.PORT, () =>{
             console.log("SERVER STARTED AT PORT: " + process.env.PORT)   
         });
     }catch(error){
@@ -29,6 +38,8 @@ const start = async () =>{
 
     }
 };
+
+SocketServer(httpServer);
 
 start();
 
@@ -43,13 +54,11 @@ app.use(cookieParser());
 app.use("/api/v1/auth", AuthRoute)
 app.use("/api/v1/token", TokenRoute)
 
-app.use(verifyJWT)
-
-app.use("/hello", (req: Request, res: Response) => {
-    res.status(StatusCodes.OK).json({msg: "Hello there!"})
-});
 
 
+app.use("/api/v1", UsersRoute)
+app.use("/api/v1", UserRoute)
+app.use("/api/v1", MessageRoute)
 
 
 

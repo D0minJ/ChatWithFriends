@@ -1,32 +1,28 @@
 import { Box } from "@chakra-ui/react"
-import {useState, useEffect} from "react"
+import {useEffect, useContext} from "react"
 import ChatPanel from "./Components/ChatPanel/ChatPanel"
 import Menu from "./Components/Menu/Menu"
 import OptionPanel from "./Components/OptionPanel/OptionPanel"
 import axios from "axios"
-
-
+import AuthContext from "../../context/AuthProvider"
+import { PageProvider } from "../../context/PageProvider"
+import { ContactProvider } from "../../context/ContactProvider"
+import { io } from "socket.io-client"
 
 export default function Chat(){
-
-    useEffect(() => {
-
-        // axios.get("http://localhost:5000/api/v1/token/renewtoken")
-        // .then((response) => {
-        //     console.log(response.data)
-        //     console.log("IT WORKS")
-        // })
-
-
-    })
+    const { setAuth }: any = useContext(AuthContext)
 
 
 
     return(
         <Box display="flex" >
-            <OptionPanel/>
-            <Menu/>
-            <ChatPanel/>
+            <PageProvider>
+                <OptionPanel/>
+                <ContactProvider>
+                    <Menu/>
+                    <ChatPanel/>
+                </ContactProvider>
+            </PageProvider>
         </Box>
     )
 }

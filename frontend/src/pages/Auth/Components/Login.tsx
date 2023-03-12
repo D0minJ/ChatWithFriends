@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { FormControl, FormLabel, VStack, Input, Button, InputGroup, InputRightElement, Tooltip, Checkbox } from '@chakra-ui/react'
-import { Form } from 'react-router-dom'
+import { FormControl, FormLabel, VStack, Input, Button, InputGroup, InputRightElement, Tooltip } from '@chakra-ui/react'
 import {BsCheck} from 'react-icons/bs'
 import {IoWarning} from 'react-icons/io5'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'

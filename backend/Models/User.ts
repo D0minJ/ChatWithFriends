@@ -3,6 +3,22 @@ import {Schema, model} from "mongoose";
 
 
 const UserSchema = new Schema({
+    userID: {
+        type: String,
+        minLength: 1,
+        maxLength: 128,
+        unique: true,
+        trim: true,
+        required: true
+    },
+    secureID: {
+        type: String,
+        minLength: 1,
+        maxLength: 128,
+        unique: true,
+        trim: true,
+        required: true
+    },
     firstname: {
         type: String,
         minLength: 1,
@@ -40,7 +56,10 @@ const UserSchema = new Schema({
     dateCreatedAccount: {
         type: String,
         default: new Date(Date.now())
-    }
+    },
+    blockedPeople:[
+        { type: Schema.Types.Mixed, ref: 'users' }
+    ]
 
 });
 

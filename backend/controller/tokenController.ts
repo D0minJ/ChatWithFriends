@@ -1,45 +1,62 @@
 import {Request, Response} from "express"
 import User from "../Models/User" 
-import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import statusCode from "http-status-codes"
 
 
 
 interface JwtPayload {
-    email: string
+    secureID: string
 }
 
-const handleRefreshToken = async (req: Request, res: Response) => {
+const renewAccessToken = async (req: Request, res: Response) => {
     const cookies = req.cookies;
+    const refreshToken = cookies.rtoken;
     
-    if(!cookies.jwt){
-        return res.sendStatus(statusCode.UNAUTHORIZED);
+    if(!refreshToken){
+        return res.status(statusCode.OK).json({error: "no refresh token"});
     }
 
-    const refreshToken = cookies.jwt;
-    
-    const user = await User.findOne({token: refreshToken});
-    
-
-    if(!user){
-        return res.sendStatus(statusCode.FORBIDDEN);
-    }
 
     try{
         const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!);
 
-        if((decoded as JwtPayload).email !== user.email){
-            return res.sendStatus(statusCode.FORBIDDEN)
+        const user = await User.findOne({secureID: (decoded as JwtPayload).secureID});
+    
+        if(!user){
+            return res.sendStatus(statusCode.FORBIDDEN);
         }
 
-        const accessToken = jwt.sign({"email": (decoded as JwtPayload).email}, process.env.JWT_ACCESS_SECRET!, {expiresIn: "1h"});
+        const accessToken = jwt.sign({secureID: (decoded as JwtPayload).secureID}, process.env.JWT_ACCESS_SECRET!, {expiresIn: "1h"});
 
-        return res.status(statusCode.OK).json({ accessToken });
+        res.cookie("atoken", accessToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000})
+        return res.sendStatus(statusCode.OK);
 
     }catch(err){
         return res.sendStatus(statusCode.FORBIDDEN)
     }
 }
 
-export {handleRefreshToken}
+
+const verifyRefreshToken = async (req: Request, res: Response) => {
+    const cookies = req.cookies;
+    const refreshToken = cookies.rtoken;
+    
+    if(!refreshToken){
+        return res.status(statusCode.OK).json({error: "no refresh token"});
+    }
+
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!, (err: any, decoded: any) =>{
+        if(err){
+            return res.sendStatus(statusCode.FORBIDDEN)
+        }else{
+            return res.sendStatus(statusCode.OK)
+        }
+    });
+
+}
+
+
+
+
+export {renewAccessToken, verifyRefreshToken}

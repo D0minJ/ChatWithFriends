@@ -30,7 +30,7 @@ export default function Validate(data: any){
         }
 
 
-        //const isValid = Object.values(errors).length == 0; 
+        
         
         return errors
 
@@ -66,7 +66,7 @@ export default function Validate(data: any){
         }
 
 
-        //const isValid = Object.values(errors).length == 0; 
+        
         
         return errors
         

@@ -1,4 +1,4 @@
-import { useContext, Context, useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Box, Center, VStack, Tabs, TabList, TabPanels, Tab, TabPanel} from "@chakra-ui/react"
 import Login from "./Components/Login"
@@ -9,8 +9,8 @@ import axios from "axios";
 
 export default function Auth(){
     const [errMsg, setErrMsg] = useState("")
-    const navigate = useNavigate()
-    const { setAuth }: any = useContext(AuthContext)
+    const { setPersist }: any = useContext(AuthContext)
+    
 
    
     const handleRegisterSubmit = (e: any, data: any, errors: any) =>{
@@ -21,8 +21,8 @@ export default function Auth(){
         }else{
             axios.post("http://localhost:5000/api/v1/auth/register", JSON.stringify(data), {headers: { 'Content-Type': 'application/json'}, withCredentials: true })
             .then((response) => {
-                setAuth({firstname: data.firstname, lastname: data.lastname, email: data.email, accessToken: response.data})
-                navigate("/", {replace: true})
+                
+                setPersist(true);
             })
             .catch((error: any) => {
                 if(error.response.status === 400){
@@ -32,16 +32,16 @@ export default function Auth(){
         }} 
 
 
-    const handleLoginSubmit =  (e: any, data: any, errors: any) =>{
+    const handleLoginSubmit = (e: any, data: any, errors: any) =>{
         e.preventDefault();
       
         if(Object.values(errors).length !== 0){
             setErrMsg(Object.values(errors).at(-1) as string)
         }else{
             axios.post("http://localhost:5000/api/v1/auth/login", JSON.stringify(data), {headers: { 'Content-Type': 'application/json'}, withCredentials: true })
-            .then((response) => {
-                setAuth({firstname: response.data.firstname, lastname: response.data.lastname, email: data.email, accessToken: response.data.accessToken})
-                navigate("/", {replace: true})
+            .then(() => {
+                
+                setPersist(true);
             })
             .catch((error: any) => {
                 if(error.response.status === 400){
