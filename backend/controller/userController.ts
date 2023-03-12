@@ -7,8 +7,7 @@ interface JwtPayload {
     secureID: string
 }
 
-
-
+// Get user credentials
 const getUser = async (req: Request, res: Response) => {
     const cookies = req.cookies;
     const refreshToken = cookies.rtoken;
@@ -17,9 +16,7 @@ const getUser = async (req: Request, res: Response) => {
         return res.sendStatus(statusCode.UNAUTHORIZED);
     }
     
-
     try{
-
         const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!);
     
         const user = await User.findOne({secureID: (decoded as JwtPayload).secureID});
@@ -33,32 +30,14 @@ const getUser = async (req: Request, res: Response) => {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email
-        })
+        });
 
     }catch(err){
-        return res.sendStatus(statusCode.FORBIDDEN)
+        return res.sendStatus(statusCode.FORBIDDEN);
     }
-    
 }
 
-const postUser = async () => {
-
-
-}
-
-
-const updateUser = async () => {
-
-
-}
-
-
-const deleteUser = async () => {
-
-
-}
-
-export {getUser, postUser, updateUser, deleteUser}
+export {getUser}
 
 
 

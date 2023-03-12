@@ -1,7 +1,6 @@
 import {Schema, model} from "mongoose";
 
 
-
 const UserSchema = new Schema({
     userID: {
         type: String,
@@ -60,7 +59,6 @@ const UserSchema = new Schema({
     blockedPeople:[
         { type: Schema.Types.Mixed, ref: 'users' }
     ]
-
 });
 
 export default model("User", UserSchema, "users");

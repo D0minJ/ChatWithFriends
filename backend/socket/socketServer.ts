@@ -8,28 +8,23 @@ interface ISocket extends Socket{
     userID?: string
 }
 
-
+// Set last message to database
 const lastMessage = async (fromID: string, fromUsername: string, toID: string, toUsername: string, message: string) => {
     const conversation = await Conversation.find({
         "recipients.userID": { $all: [fromID, toID]}
-    })
-
+    });
 
     if(conversation.length === 0){
         const conversation = await Conversation.create({
-            recipients: [{userID: fromID, username: fromUsername}, {userID: toID, username: toUsername}], //[fromID, toID]
+            recipients: [{userID: fromID, username: fromUsername}, {userID: toID, username: toUsername}], 
             lastMessage: message,
             date: new Date(Date.now())
-        })
+        });
         
-        
-
-    }else{
+    } else {
         const conversation = await Conversation.updateOne({ "recipients.userID": { $all: [fromID, toID]} }, { lastMessage: message, date: new Date(Date.now())});
-
     }
 }
-
 
 export default function SocketServer(httpServer: any){
     let activeUsers: any = []
@@ -42,24 +37,26 @@ export default function SocketServer(httpServer: any){
 
     io.use((socket: ISocket, next) => {
         const userID = socket.handshake.auth.userID;
+
         if(!userID){
-            return next(new Error("invalid user id"))
+            return next(new Error("invalid user id"));
         }
-        socket.user = User.findOne({userID: userID})
+
+        socket.user = User.findOne({userID: userID});
         socket.userID = userID;
         next();
-    })
-
+    });
 
     io.on("connection", (socket: ISocket) => {
+
         var user = {
             socketID: socket.id,
             userID: socket.userID! 
         }
-        activeUsers.push(user)
+        activeUsers.push(user);
 
         console.log("User " + socket.userID + " connected. Session ID: " + socket.id);
-        console.log(activeUsers)
+        console.log(activeUsers);
 
         socket.on("send message", (from, to, fromUsername, toUsername, content) => { 
             // Translate user ID to socket ID
@@ -82,17 +79,14 @@ export default function SocketServer(httpServer: any){
                 io.to(_from.socketID).to(_to.socketID).emit("receive message", {from: from, to: to, content: content});
             }
 
-            
         });
         
         socket.on('disconnect', () => {
             activeUsers = activeUsers.filter((obj: any) => obj.socketID !== socket.id )
-            console.log('🔥: A user disconnected');
+            console.log('A user disconnected');
             socket.disconnect();
           });
-
     });
-
 }
 
 

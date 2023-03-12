@@ -1,11 +1,12 @@
 import {Request, Response} from "express"
-import User from "../Models/User" 
 import bcrypt from "bcrypt"
 import statusCode from "http-status-codes"
-import ValidateRegister from "../validation/registerValidate"
-import ValidateLogin from "../validation/loginValidate"
 import jwt from "jsonwebtoken"
 import { v4 as uuidv4 } from "uuid"
+
+import ValidateRegister from "../validation/registerValidate"
+import ValidateLogin from "../validation/loginValidate"
+import User from "../Models/User"
 
 interface JwtPayload {
     secureID: string
@@ -14,20 +15,20 @@ interface JwtPayload {
 const register = async (req: Request, res: Response) => {
     const {firstname, lastname, email, password} = req.body;
     const {error, isValid} = ValidateRegister(req.body);
-    const userID = uuidv4()
-    const secureID = uuidv4()
+    const userID = uuidv4();
+    const secureID = uuidv4();
 
     if(!isValid){
-        return res.status(statusCode.BAD_REQUEST).json(error)
+        return res.status(statusCode.BAD_REQUEST).json(error);
     }
 
     try{
+
         const accessToken = jwt.sign({secureID: secureID}, process.env.JWT_ACCESS_SECRET!, {expiresIn: "1d"});
         const refreshToken = jwt.sign({secureID: secureID}, process.env.JWT_REFRESH_SECRET!, {expiresIn: "30d"});
-        
-        
-
+            
         const hashPassword = await bcrypt.hash(password, 10);
+
         const user = await User.create({
             userID: userID,
             secureID: secureID,
@@ -35,15 +36,19 @@ const register = async (req: Request, res: Response) => {
             lastname: lastname,
             email: email,
             password: hashPassword,
-            refreshToken: {token: refreshToken, dateCreatedToken: new Date(Date.now()), tokenExpire: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
+            refreshToken: {
+                    token: refreshToken, 
+                    dateCreatedToken: new Date(Date.now()), 
+                    tokenExpire: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+                }
         });
 
         
-        res.cookie("rtoken", refreshToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 30 * 24 * 60 * 60 * 1000})
-        res.cookie("atoken", accessToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000})
-        return res.sendStatus(statusCode.OK)
+        res.cookie("rtoken", refreshToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 30 * 24 * 60 * 60 * 1000});
+        res.cookie("atoken", accessToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000});
+        return res.sendStatus(statusCode.OK);
         
-    }catch(err: any){
+    } catch(err: any) {
         if(err.code !== 11000){
             console.log(err);
         }
@@ -62,25 +67,25 @@ const login = async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
     
     if(!user){
-        return res.status(statusCode.BAD_REQUEST).json({error: "Incorrect password or email"})
+        return res.status(statusCode.BAD_REQUEST).json({error: "Incorrect password or email"});
     }
 
 
     const isMatch = await bcrypt.compare(password, user.password);
     
     if(!isMatch){
-        return res.status(statusCode.BAD_REQUEST).json({error: "Incorrect password or email"})
-    }
-    else{
+        return res.status(statusCode.BAD_REQUEST).json({error: "Incorrect password or email"});
+    } else {
+
         const accessToken = jwt.sign({secureID: user.secureID}, process.env.JWT_ACCESS_SECRET!, {expiresIn: "1d"});
         const refreshToken = jwt.sign({secureID: user.secureID}, process.env.JWT_REFRESH_SECRET!, {expiresIn: "30d"});
 
-        await User.findOneAndUpdate({email: user.email}, {refreshToken:{token: refreshToken, dateCreatedToken: new Date(Date.now()), tokenExpire: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}})
+        await User.findOneAndUpdate({email: user.email}, {refreshToken:{token: refreshToken, dateCreatedToken: new Date(Date.now()), tokenExpire: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}});
 
         
-        res.cookie("rtoken", refreshToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 30 * 24 * 60 * 60 * 1000})
-        res.cookie("atoken", accessToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000})
-        return res.sendStatus(statusCode.OK)
+        res.cookie("rtoken", refreshToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 30 * 24 * 60 * 60 * 1000});
+        res.cookie("atoken", accessToken, {httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000});
+        return res.sendStatus(statusCode.OK);
     }
 }
 
@@ -101,13 +106,13 @@ const logout = async (req: Request, res: Response) => {
             return res.sendStatus(statusCode.FORBIDDEN);
         }
 
-        res.clearCookie("rtoken", {path: "/"})
-        res.clearCookie("atoken", {path: "/"})
-        return res.sendStatus(statusCode.OK)
+        res.clearCookie("rtoken", {path: "/"});
+        res.clearCookie("atoken", {path: "/"});
+        return res.sendStatus(statusCode.OK);
 
     }catch(err){
-        console.log(err)
-        return res.sendStatus(statusCode.FORBIDDEN)
+        console.log(err);
+        return res.sendStatus(statusCode.FORBIDDEN);
     }
 }
 
@@ -119,7 +124,7 @@ const islogged = async (req: Request, res: Response) =>{
     }
 
     if(cookies.islogged){
-        return res.status(statusCode.OK).json({islogged: true})
+        return res.status(statusCode.OK).json({islogged: true});
     }
     
 }

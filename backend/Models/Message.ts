@@ -1,5 +1,4 @@
-import {Schema, SchemaType, model} from "mongoose";
-
+import {Schema, model} from "mongoose";
 
 
 const MessageSchema = new Schema({
@@ -19,7 +18,6 @@ const MessageSchema = new Schema({
         type: Date,
         default: new Date(Date.now())
     }
-
 });
 
 export default model("Message", MessageSchema, "messages");
