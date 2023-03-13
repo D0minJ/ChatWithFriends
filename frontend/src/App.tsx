@@ -1,5 +1,5 @@
 import {useContext} from "react"
-import {BrowserRouter, Route, Routes, Navigate, useNavigate} from "react-router-dom";
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 
 
 import Auth from './pages/Auth/Auth';

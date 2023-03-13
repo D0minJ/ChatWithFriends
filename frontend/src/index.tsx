@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   
-    <ChakraProvider theme={theme}>
+  <ChakraProvider theme={theme}>
     <AuthProvider>
       <App/>
     </AuthProvider>

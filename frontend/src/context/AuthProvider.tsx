@@ -27,14 +27,7 @@ export function AuthProvider({ children }: any) {
                 } else {
                     // Renew refresh token
                     axios.get("http://localhost:5000/api/v1/token/renewtoken", {withCredentials: true})
-                        .then(()=> {
-                            // Get user info
-                            axios.get("http://localhost:5000/api/v1/user", {withCredentials: true})
-                                .then((response) => {
-                                    // Connect to socket server
-                                    const socket = io("http://localhost:5000/", { auth: { userID: response.data.userID}});
-                                    setAuth({...response.data, socket: socket})
-                                })
+                        .then(()=> {                
                             setPersist(true)
                         }
                     )

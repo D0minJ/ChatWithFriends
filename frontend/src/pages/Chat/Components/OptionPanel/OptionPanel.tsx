@@ -1,16 +1,24 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 import { Box, Center, Avatar, VStack, Tooltip, Button } from "@chakra-ui/react";
 import {BsChatDotsFill, BsFillPersonFill} from "react-icons/bs";
 
 import PageContext from "../../../../context/PageProvider";
 
+
+
 export default function OptionPanel(){
     const { setPage }:any = useContext(PageContext)
+    const navigate = useNavigate()
+
+    const refreshPage = () => {
+        navigate(0);
+    }
 
     return(
         <Box h="100vh" w="4%"   bg="#FFFFFF" display="flex" position="relative" justifyContent="center" borderRight="1px solid #F5F3F4" >
-            <Center fontFamily="logo" color="#E5383B" fontSize="xl" position="absolute">
+            <Center fontFamily="logo" color="#E5383B" fontSize="xl" position="absolute" cursor="pointer" onClick={refreshPage}>
                 CwF
             </Center>
             <VStack  spacing="15px">
