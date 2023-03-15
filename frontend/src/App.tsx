@@ -14,8 +14,8 @@ export default function App(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route path='/login' element={persist ? <Navigate to='/' replace={true}/> : <Auth/>} />
                 <Route path='/' element={persist ? <Chat/> : <Navigate to='/login' replace={true}/>} />
+                <Route path='/login' element={persist ? <Navigate to='/' replace={true}/> : <Auth/>} />
                 <Route path='*' element={<Error/>} />
             </Routes>
         </BrowserRouter>
