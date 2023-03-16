@@ -16,7 +16,6 @@ const renewAccessToken = async (req: Request, res: Response) => {
         return res.status(statusCode.OK).json({error: "no refresh token"});
     }
 
-
     try{
         const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!);
 

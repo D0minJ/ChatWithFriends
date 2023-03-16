@@ -1,6 +1,8 @@
 import {Request, Response} from "express"
 import statusCode from "http-status-codes";
 import jwt from "jsonwebtoken"
+import dayjs from "dayjs"
+import calendar from "dayjs/plugin/calendar"
 
 import Message from "../Models/Message";
 import User from "../Models/User";
@@ -10,9 +12,13 @@ interface JwtPayload {
     secureID: string
 }
 
+dayjs.extend(calendar)
+
+
+
 // Get chat history
 const getChats = async (req: Request, res: Response) => { 
-    var conversationList: any = []
+    var conversationList: Array<object> = []
 
     const cookies = req.cookies;
     const refreshToken = cookies.rtoken;
@@ -44,7 +50,7 @@ const getChats = async (req: Request, res: Response) => {
                 friendID: message.recipients[0].userID !== userID? message.recipients[0].userID : message.recipients[1].userID,
                 friendUsername: message.recipients[0].userID !== userID? message.recipients[0].username : message.recipients[1].username,
                 lastMessage: message.lastMessage,
-                date: message.date,
+                date: dayjs(message.date).calendar()
             });
         });
         
@@ -58,7 +64,7 @@ const getChats = async (req: Request, res: Response) => {
 
 // Get all messages from particular user
 const getMessages = async (req: Request, res: Response) => { 
-    var messagesList: any = []
+    var messagesList: Array<object> = []
 
     const cookies = req.cookies;
     const refreshToken = cookies.rtoken;
@@ -110,10 +116,15 @@ const getMessages = async (req: Request, res: Response) => {
             });
 
         messages.map((message: any) => {
-            messagesList.push({from: message.from.from_id, to: message.to.to_id, body: message.body, date: message.date});
+            messagesList.push({
+                from: message.from.from_id,
+                to: message.to.to_id,
+                body: message.body,
+                date: dayjs(message.date).format("D MMM YYYY, h:mm a")
+            });
            
         })
-        return res.status(statusCode.OK).json(messagesList)  ;
+        return res.status(statusCode.OK).json(messagesList);
 
     }catch(error){
         console.log(error);

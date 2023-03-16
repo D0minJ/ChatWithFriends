@@ -63,6 +63,10 @@ export default function SocketServer(httpServer: any){
             const _from = activeUsers.find((user: any) => user.userID === from);
             const _to = activeUsers.find((user: any) => user.userID === to);
 
+            if(content === ""){
+                return 0;
+            }
+
             const message = Message.create({
                 to: {to_id: to, to_username: toUsername},
                 from: {from_id: from, from_username: fromUsername },
