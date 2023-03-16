@@ -39,10 +39,10 @@ export default function MessagesPanel({socket, userID}: any){
         <Box w="100%" h="calc(100vh - 12rem)" overflow="scroll">
             {content.map((m: any, i: any) => {
                 if(m.from === userID) {
-                    return <UserMessage key={i} message={m.body} />
+                    return <UserMessage key={i} message={m.body} date={m.date} />
                 }
                 if(m.from !== userID) {
-                    return <FriendMessage key={i} message={m.body}/>   
+                    return <FriendMessage key={i} message={m.body} date={m.date} />   
                 }
             })}
             <div ref={chatBottom} />

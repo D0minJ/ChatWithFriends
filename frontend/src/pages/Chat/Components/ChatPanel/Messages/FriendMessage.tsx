@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex } from "@chakra-ui/react"
+import { Avatar, Box, Flex, Tooltip } from "@chakra-ui/react"
 
 export default function FriendMessage(props:any){
 
@@ -8,9 +8,11 @@ export default function FriendMessage(props:any){
                 <Box position="relative">
                     <Avatar size="sm"  />
                 </Box>
-                <Box bg="#F5F3F4" color="#0B090A" ml="0.5rem" px="1rem" py="0.5rem" fontSize="sm" borderRadius="20px"> 
-                    {props.message}
-                </Box>
+                <Tooltip placement="right" label={props.date} variant="red">
+                    <Box bg="#F5F3F4" color="#0B090A" ml="0.5rem" px="1rem" py="0.5rem" fontSize="sm" borderRadius="20px"> 
+                        {props.message}
+                    </Box>
+                </Tooltip>
             </Flex>
         </Box>
     )

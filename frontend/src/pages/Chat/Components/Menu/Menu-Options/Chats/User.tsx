@@ -10,7 +10,7 @@ export default function User({username, friendID, lastmsg, date }: any){
 
     return(
         <HStack bg="#FFFFFF" width="95%" h="4rem" mx="auto" mt="0.5rem" p="10px" position="relative" justify="space-between" borderRadius="6px" cursor="pointer" _hover={{background: "#F5F3F4"}} 
-        onClick={() => setContact({friendID: friendID, username: username, })} >
+        onClick={() => setContact({friendID: friendID, username: username})} >
             <Avatar size="sm"/>
             <Container p="0">
                 <Container p="0">
@@ -18,7 +18,7 @@ export default function User({username, friendID, lastmsg, date }: any){
                     <Text fontSize="xs">{lastmsg}</Text>
                 </Container>
             </Container>
-            <Text fontSize="2xs" verticalAlign="top" position="relative" bottom="20px">{date}</Text>
+            <Text fontSize="2xs" verticalAlign="top" >{date}</Text>
         </HStack>
     )
 }

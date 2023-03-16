@@ -24,7 +24,7 @@ export default function Profile(props: any){
         <Box pos="relative" height="100%">
             <VStack>
                 <Avatar size="2xl" mt="1rem"/>
-                <Text>{auth.firstname} {auth.lastname}</Text>
+                <Text fontSize="2xl">{auth.firstname} {auth.lastname}</Text>
             </VStack>
             <Center>
                 <Button pos="absolute" bottom="2rem" colorScheme="red" color="white" onClick={handleLogout}>

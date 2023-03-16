@@ -5,14 +5,23 @@ import {HiOutlineEmojiHappy} from "react-icons/hi"
 import {MdOutlineAttachFile} from "react-icons/md"
 import {AiOutlineSend} from "react-icons/ai"
 
+import validator from "validator"
+
 
 export default function ChatInput({socket, userID, friendID, fromUsername, toUsername}: any){
     const message: any = useRef("")
     
     const onSendMessage = (e: any) => {
         e.preventDefault();
-        socket.emit("send message", userID, friendID, fromUsername, toUsername, message.current.value);
-        message.current.value = "";
+        if(!message.current.value.replace(/\s/g, '').length){
+            
+        }else{
+            console.log(message.current.value)
+            socket.emit("send message", userID, friendID, fromUsername, toUsername, message.current.value);
+            message.current.value = "";
+
+        }
+        
 
     }
 
