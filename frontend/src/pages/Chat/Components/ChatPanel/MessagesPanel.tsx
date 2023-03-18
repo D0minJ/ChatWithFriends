@@ -36,7 +36,7 @@ export default function MessagesPanel({socket, userID}: any){
       }, [content])
 
     return(
-        <Box w="100%" h="calc(100vh - 12rem)" overflow="scroll">
+        <Box w="100%" h="calc(100vh - 12rem)" overflow="scroll" overflowX="hidden">
             {content.map((m: any, i: any) => {
                 if(m.from === userID) {
                     return <UserMessage key={i} message={m.body} date={m.date} />

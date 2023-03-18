@@ -1,7 +1,9 @@
 import { Box, Input, VStack, Text, Spinner, Center } from "@chakra-ui/react"
 import Contact from "./Contact"
-import { useState } from "react"
+import React, { useState } from "react"
 import axios from "axios";
+
+import { BsSearch } from "react-icons/bs"
 
 export default function Contacts(){
     const [users, setUsers] = useState<any | []>([])
@@ -25,10 +27,18 @@ export default function Contacts(){
         <Box>
             <Box fontSize="2xl">Contacts</Box>
             <VStack >
-                <Input placeholder="Search user" my="1rem" onChange={handleSearchUser} />
+                <Input placeholder="Search user" my="1rem" focusBorderColor="focusRed" onChange={handleSearchUser} />
             </VStack>
             {
-                loading?
+                users.length === 0?
+                    <VStack color="gray" mt="100%" fontSize="2xl">
+                        <BsSearch/>
+                        <Box cursor="default">Find new friends!</Box>
+                    </VStack>
+                    
+                :
+                <React.Fragment>
+                    {loading?
                     <Center>
                         <Spinner color="red" size="xl" mt="100%" />
                     </Center>
@@ -37,11 +47,11 @@ export default function Contacts(){
                         users.map((user: any, i: any) => (
                             <Contact key={i} user={user} />
                         )
-                    )
+                    )}
+                </React.Fragment>
+
+
                 
-
-
-
             }
             
             

@@ -13,7 +13,7 @@ export default function ChatPanel(){
     const {auth}:any = useContext(AuthContext);
     
     return(
-        <Box h="100vh" w="77%" bg="#FFFFFF" borderLeft="1px solid #F5F3F4" >
+        <Box h="100vh" w="77%" bg="#FFFFFF" borderLeft="1px solid #F5F3F4" pos="relative" >
             {Object.keys(contact).length !== 0 &&
                 <React.Fragment>
                     <Header username={contact.username} />
@@ -29,7 +29,7 @@ export default function ChatPanel(){
             }
             {
                 Object.keys(contact).length === 0 &&
-                    <Center>WELCOME IN CHAT WITH FRIENDS</Center>
+                    <Center fontFamily="logo" color="#E5383B" fontSize="4xl"> Chat With Friends! </Center>
             }
         </Box>
     );

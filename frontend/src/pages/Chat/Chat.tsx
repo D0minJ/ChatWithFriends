@@ -29,7 +29,7 @@ export default function Chat(){
     }, [])
 
     return(
-        <Box display="flex" >
+        <Box display="flex" h="100%">
             <PageProvider>
                 <OptionPanel/>
                 <ContactProvider>

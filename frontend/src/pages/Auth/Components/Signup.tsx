@@ -21,7 +21,7 @@ export default function Signup(props: any){
     return(
         <form onSubmit={(e) => props.registerSubmit(e, {firstname: fname, lastname: lname, email: email, password: password}, errors)} autoComplete="off">
             <VStack>
-                <HStack>
+                <HStack w="100%">
                     <FormControl id='firstname'>
                         <FormLabel>Firstname</FormLabel>
                         <InputGroup>

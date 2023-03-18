@@ -1,10 +1,13 @@
 import { useContext } from "react";
-
-import {Avatar, Box, Button, Center, Text, VStack} from "@chakra-ui/react";
-import {BiLogOut} from "react-icons/bi"
 import axios from "axios";
 
+import { Avatar, Box, Button, Center, Text, VStack, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from "@chakra-ui/react";
+import {BiLogOut} from "react-icons/bi"
+
 import AuthContext from "../../../../../../context/AuthProvider";
+import FirstnameTab from "./FirstnameTab";
+import LastnameTab from "./LastnameTab";
+import ColormodeTab from "./ColormodeTab";
 
 export default function Profile(props: any){
     const { auth, setPersist }: any = useContext(AuthContext)
@@ -25,6 +28,11 @@ export default function Profile(props: any){
             <VStack>
                 <Avatar size="2xl" mt="1rem"/>
                 <Text fontSize="2xl">{auth.firstname} {auth.lastname}</Text>
+                <Accordion allowToggle>
+                    <FirstnameTab/>
+                    <LastnameTab/>
+                    <ColormodeTab/>
+                </Accordion>
             </VStack>
             <Center>
                 <Button pos="absolute" bottom="2rem" colorScheme="red" color="white" onClick={handleLogout}>
