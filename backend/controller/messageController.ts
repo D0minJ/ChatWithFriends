@@ -50,7 +50,7 @@ const getChats = async (req: Request, res: Response) => {
                 friendID: message.recipients[0].userID !== userID? message.recipients[0].userID : message.recipients[1].userID,
                 friendUsername: message.recipients[0].userID !== userID? message.recipients[0].username : message.recipients[1].username,
                 lastMessage: message.lastMessage,
-                date: dayjs(message.date).calendar()
+                date: dayjs(message.date).calendar(null, {sameElse: "DD/MM/YYYY"})
             });
         });
         

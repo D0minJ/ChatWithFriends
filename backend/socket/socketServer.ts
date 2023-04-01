@@ -42,7 +42,6 @@ export default function SocketServer(httpServer: any){
             return next(new Error("invalid user id"));
         }
 
-        socket.user = User.findOne({userID: userID});
         socket.userID = userID;
         next();
     });

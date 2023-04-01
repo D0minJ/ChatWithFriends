@@ -12,6 +12,7 @@ import UserRoute from "./routes/user"
 import UsersRoute from "./routes/users"
 import MessageRoute from "./routes/message"
 
+import { verifyJWT } from "./middleware/verifyJWT";
 import credentials from "./middleware/credentials";
 import corsOptions from "./config/corsOptions";
 
@@ -53,6 +54,8 @@ app.use(cookieParser());
 app.use("/api/v1/auth", AuthRoute);
 
 app.use("/api/v1/token", TokenRoute);
+
+app.use(verifyJWT)
 
 app.use("/api/v1", UsersRoute);
 
