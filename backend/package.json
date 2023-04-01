@@ -28,6 +28,7 @@
     "@types/uuid": "^9.0.0",
     "@types/validator": "^13.7.10",
     "bcrypt": "^5.1.0",
+    "concurrently": "^8.0.1",
     "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.7",
     "jsonwebtoken": "^8.5.1",
